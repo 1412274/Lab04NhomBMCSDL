@@ -83,11 +83,6 @@ namespace Lab03Nhom
             Thread thread = new Thread(new ThreadStart(ShowThemLop));
             thread.Start();
             this.Close();
-
-            //ThemLop lop = new ThemLop();
-            //this.Hide();
-            //lop.Show();
-
         }
 
         private void btn_DSSV_Click(object sender, EventArgs e)
@@ -98,7 +93,6 @@ namespace Lab03Nhom
             Thread thread = new Thread(new ThreadStart(ShowSinhVien));
             thread.Start();
             this.Close();
-
         }
     }
 }
