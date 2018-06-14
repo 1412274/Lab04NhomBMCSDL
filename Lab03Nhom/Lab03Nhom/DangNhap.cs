@@ -9,32 +9,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-
+using System.Security.Cryptography;
 
 namespace Lab03Nhom
 {
     public partial class DangNhap : Form
     {
         public string name;
-        public string password;
+        //public string password;
         public DangNhap()
         {
             InitializeComponent();
         }
-
+        static string GetSHA1Hash(string data)
+        {
+            SHA1 sha1 = SHA1.Create();
+            byte[] hashData = sha1.ComputeHash(Encoding.Default.GetBytes(data));
+            StringBuilder returnValue = new StringBuilder();
+            for (int i = 0; i < hashData.Length; i++)
+            {
+                returnValue.Append(hashData[i].ToString());
+            }
+            return returnValue.ToString();
+        }
         private void ShowDanhSachLop()
         {
             DanhSachLop dsl = new DanhSachLop(name);
             dsl.ShowDialog();
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVN;Integrated Security=True";
+        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
         private void btnlogin_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection(connectstring);
             name = txtname.Text;
-            password = txtpass.Text;
-            string query = "select * from NHANVIEN where MANV = '"+name+"' and hashbytes('sha1','"+password+"') = MATKHAU";
+            string password = SHA1Hash.Hash(txtpass.Text);
+            string query = "select * from NHANVIEN where MANV = '"+name+"' and convert(varbinary,'"+password+"') = MATKHAU";
             SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
             SqlDataAdapter adapter = new SqlDataAdapter(command);

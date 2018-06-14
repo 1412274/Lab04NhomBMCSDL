@@ -26,7 +26,7 @@ namespace Lab03Nhom
             this.manv = _manv;
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVN;Integrated Security=True";
+        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
         private void ThemLop_Load(object sender, EventArgs e)
         {
             //string manv = DangNhap.name;

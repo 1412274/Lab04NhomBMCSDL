@@ -35,13 +35,19 @@ namespace Lab03Nhom
             tl.ShowDialog();
         }
 
+        private void ShowSuaLop()
+        {
+            SuaLop sl = new SuaLop(manv);
+            sl.ShowDialog();
+        }
+
         private void ShowSinhVien()
         {
             SinhVien sv = new SinhVien(malop, manv);
             sv.ShowDialog();
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVN;Integrated Security=True";
+        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
 
         private void DanhSachLop_Load(object sender, EventArgs e)
         {
@@ -83,6 +89,11 @@ namespace Lab03Nhom
             Thread thread = new Thread(new ThreadStart(ShowThemLop));
             thread.Start();
             this.Close();
+
+            //ThemLop lop = new ThemLop();
+            //this.Hide();
+            //lop.Show();
+
         }
 
         private void btn_DSSV_Click(object sender, EventArgs e)
@@ -93,6 +104,45 @@ namespace Lab03Nhom
             Thread thread = new Thread(new ThreadStart(ShowSinhVien));
             thread.Start();
             this.Close();
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(new ThreadStart(ShowSuaLop));
+            thread.Start();
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataSet data = GetLopHoc();
+            int i = dataGridView1.CurrentCell.RowIndex;
+            string index = data.Tables[0].Rows[i]["MALOP"].ToString();
+            SqlConnection conn = new SqlConnection(connectstring);
+            conn.Open();
+            string delete = "delete from LOP where MALOP = '"+index+"'";
+            SqlCommand command = new SqlCommand(delete, conn);
+
+            string MessageBoxTitle = "Thông báo!!!";
+            string MessageBoxContent = "Bạn có thực sự muốn xóa lớp không?";
+
+            DialogResult result = MessageBox.Show(MessageBoxContent, MessageBoxTitle, MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                SqlDataReader r = command.ExecuteReader();
+                if (DialogResult.OK == MessageBox.Show("Xóa dữ liệu thành công!!!"))
+                {
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.DataSource = GetLopHoc().Tables[0];
+                }
+            }
+            if(result == DialogResult.No)
+            {
+                //
+            }
+
+
         }
     }
 }

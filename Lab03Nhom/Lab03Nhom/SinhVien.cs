@@ -88,9 +88,6 @@ namespace Lab03Nhom
 
         private void SinhVien_Load(object sender, EventArgs e)
         {
-            MaLop = "14CTT2";
-            MaNVDN = "NV01";
-
             tb_MaLop.Text = MaLop;
             tb_MaNV.Text = MaNVDN;
             LoadData();
