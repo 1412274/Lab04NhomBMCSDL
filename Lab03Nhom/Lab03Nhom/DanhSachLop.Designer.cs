@@ -39,6 +39,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnthem = new System.Windows.Forms.Button();
             this.btn_DSSV = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -52,7 +54,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(6, 30);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(295, 221);
+            this.dataGridView1.Size = new System.Drawing.Size(370, 221);
             this.dataGridView1.TabIndex = 0;
             // 
             // txtmanv
@@ -66,14 +68,14 @@
             // 
             this.txthoten.Location = new System.Drawing.Point(80, 66);
             this.txthoten.Name = "txthoten";
-            this.txthoten.Size = new System.Drawing.Size(160, 20);
+            this.txthoten.Size = new System.Drawing.Size(131, 20);
             this.txthoten.TabIndex = 4;
             // 
             // txtemail
             // 
             this.txtemail.Location = new System.Drawing.Point(80, 102);
             this.txtemail.Name = "txtemail";
-            this.txtemail.Size = new System.Drawing.Size(160, 20);
+            this.txtemail.Size = new System.Drawing.Size(131, 20);
             this.txtemail.TabIndex = 5;
             // 
             // groupBox1
@@ -86,7 +88,7 @@
             this.groupBox1.Controls.Add(this.txthoten);
             this.groupBox1.Location = new System.Drawing.Point(12, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(280, 147);
+            this.groupBox1.Size = new System.Drawing.Size(226, 147);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin nhân viên";
@@ -121,16 +123,16 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(319, 22);
+            this.groupBox2.Location = new System.Drawing.Point(244, 22);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(307, 257);
+            this.groupBox2.Size = new System.Drawing.Size(382, 257);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Danh sách lớp nhân viên quản lí";
             // 
             // btnthem
             // 
-            this.btnthem.Location = new System.Drawing.Point(194, 250);
+            this.btnthem.Location = new System.Drawing.Point(10, 213);
             this.btnthem.Name = "btnthem";
             this.btnthem.Size = new System.Drawing.Size(75, 23);
             this.btnthem.TabIndex = 8;
@@ -140,7 +142,7 @@
             // 
             // btn_DSSV
             // 
-            this.btn_DSSV.Location = new System.Drawing.Point(22, 250);
+            this.btn_DSSV.Location = new System.Drawing.Point(61, 250);
             this.btn_DSSV.Name = "btn_DSSV";
             this.btn_DSSV.Size = new System.Drawing.Size(145, 23);
             this.btn_DSSV.TabIndex = 9;
@@ -148,11 +150,33 @@
             this.btn_DSSV.UseVisualStyleBackColor = true;
             this.btn_DSSV.Click += new System.EventHandler(this.btn_DSSV_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(164, 213);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Sửa lớp";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(87, 213);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Xóa lớp";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // DanhSachLop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 283);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_DSSV);
             this.Controls.Add(this.btnthem);
             this.Controls.Add(this.groupBox2);
@@ -181,5 +205,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnthem;
         private System.Windows.Forms.Button btn_DSSV;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
