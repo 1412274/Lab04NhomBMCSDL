@@ -16,7 +16,7 @@ namespace Lab03Nhom
     {
         SqlConnection connection = null;
         SqlCommand command = null;
-        String connectionstring = @"Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        String connectionstring = ConnectString.GetConnection();
         string MaLop = null;
         string MaNVDN = null;
 

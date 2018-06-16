@@ -15,6 +15,8 @@ namespace Lab03Nhom
 {
     public partial class DangNhap : Form
     {
+        string connectstring = ConnectString.GetConnection();
+
         public string name;
         //public string password;
         public DangNhap()
@@ -38,7 +40,6 @@ namespace Lab03Nhom
             dsl.ShowDialog();
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
         private void btnlogin_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection(connectstring);

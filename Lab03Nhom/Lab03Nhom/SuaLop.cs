@@ -23,7 +23,7 @@ namespace Lab03Nhom
             InitializeComponent();
             this.manv = _manv;
         }
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        string connectstring = ConnectString.GetConnection();
 
         private void SuaLop_Load(object sender, EventArgs e)
         {

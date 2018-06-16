@@ -13,7 +13,7 @@ namespace Lab03Nhom
 {
     public partial class NhapDiem : Form
     {
-        String connectionString = @"Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        String connectionString = ConnectString.GetConnection();
         String MaSV = null;
         String HoTen = null;
         String MaLop = null;
