@@ -34,3 +34,16 @@ C:\Users\nhkim\Desktop\Lab04Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.SinhVien.resource
 C:\Users\nhkim\Desktop\Lab04Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.csproj.GenerateResource.Cache
 C:\Users\nhkim\Desktop\Lab04Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.exe
 C:\Users\nhkim\Desktop\Lab04Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.pdb
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\bin\Debug\Lab03Nhom.exe.config
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\bin\Debug\Lab03Nhom.exe
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\bin\Debug\Lab03Nhom.pdb
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.csprojResolveAssemblyReference.cache
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.DangNhap.resources
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.DanhSachLop.resources
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.NhapDiem.resources
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.Properties.Resources.resources
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.SinhVien.resources
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.csproj.GenerateResource.Cache
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.csproj.CoreCompileInputs.cache
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.exe
+C:\Users\ThienPhu\Documents\GitHub\Lab04NhomBMCSDL\Lab03Nhom\Lab03Nhom\obj\Debug\Lab03Nhom.pdb

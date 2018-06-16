@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Lab03Nhom
 {
     public partial class NhapDiem : Form
     {
-        String connectionString = @"Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        String connectionString = "Data Source=DESKTOP-BD4IRUN\\SQLSERVER2017;Initial Catalog=QLSVNhom;Integrated Security=True";
         String MaSV = null;
         String HoTen = null;
         String MaLop = null;
@@ -43,8 +45,7 @@ namespace Lab03Nhom
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SP_SEL_HOCPHAN ", connection);
-                command.CommandType = CommandType.StoredProcedure;
+                SqlCommand command = new SqlCommand("select * from hocphan ", connection);
 
                 SqlDataReader reader;
                 DataTable table = new DataTable();
@@ -68,29 +69,24 @@ namespace Lab03Nhom
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SP_SEL_BANGDIEM ", connection);
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.Clear();
-                command.Parameters.Add("@MASV", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@MK", SqlDbType.NVarChar, 100);
-                command.Parameters.Add("@PUBKEY", SqlDbType.VarChar, 20);
-
-                command.Parameters["@MASV"].Value = this.textBoxMaSinhVien.Text;
-                command.Parameters["@MK"].Value = this.textBoxMatKhau.Text;
-                command.Parameters["@PUBKEY"].Value = MaNVDN;
-
+                SqlCommand command = new SqlCommand("select masv, mahp, diemthi from bangdiem where masv = '"+ this.textBoxMaSinhVien.Text +"'", connection);
+  
                 SqlDataReader reader;
-                DataTable table = new DataTable();
 
                 reader = command.ExecuteReader();
-                table.Load(reader);
+ 
+                DataTable table = new DataTable();
+                table.Columns.Add(new DataColumn("masv"));
+                table.Columns.Add(new DataColumn("mahp"));
+                table.Columns.Add(new DataColumn("diemthi"));
+
+                while (reader.Read())
+                {
+                    byte[] byteDiemThi = (Byte[])reader.GetValue(2);
+                    table.Rows.Add(reader.GetValue(0), reader.GetValue(1), EncryptorRSA.RSAdecrypt(byteDiemThi, this.textBoxMatKhau.Text));
+                }
 
                 this.dataGridViewDiemThi.DataSource = table;
-
-                command.CommandText = "SP_SEL_HOCPHAN";
-                command.Parameters.Clear();
-
 
                 connection.Close();
             }
@@ -102,25 +98,20 @@ namespace Lab03Nhom
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SP_INS_BANGDIEM  ", connection);
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.Clear();
-                command.Parameters.Add("@MASV", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@MAHP", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@PUBKEY", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@DIEMTHI", SqlDbType.Float);
-                command.Parameters.Add("@KQ", SqlDbType.Int).Direction = ParameterDirection.Output;
-
-                command.Parameters["@MASV"].Value = this.textBoxMaSinhVien.Text;
-                command.Parameters["@MAHP"].Value = this.comboBoxDSHocPhan.SelectedValue;
-                command.Parameters["@PUBKEY"].Value = MaNVDN;
-                command.Parameters["@DIEMTHI"].Value = this.textBoxDiem.Text;
-                command.Parameters["@KQ"].Value = 0;
-
-                command.ExecuteNonQuery();
+                String pubKey = EncryptorRSA.createKeyPair(this.textBoxMatKhau.Text);
+                byte[] encryptedDiem = EncryptorRSA.RSAencrypt(this.textBoxDiem.Text, pubKey);
                 
-                if (command.Parameters["@KQ"].Value.ToString() == "1")
+                String commandText = "insert into bangdiem values('" 
+                    + this.textBoxMaSinhVien.Text + "', '" 
+                    + this.comboBoxDSHocPhan.SelectedValue + "', @encryptedDiem)";
+
+                SqlCommand command = new SqlCommand(commandText, connection);
+                command.Parameters.Add("@encryptedDiem", SqlDbType.VarBinary);
+                command.Parameters["@encryptedDiem"].Value = encryptedDiem;
+  
+                int result = command.ExecuteNonQuery();
+                
+                if (result != 1)
                 {
                     MessageBox.Show("Có lỗi xảy ra");
                 } else

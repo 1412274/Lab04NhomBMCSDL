@@ -38,7 +38,7 @@ namespace Lab03Nhom
             dsl.ShowDialog();
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        string connectstring = "Data Source=DESKTOP-BD4IRUN\\SQLSERVER2017;Initial Catalog=QLSVNhom;Integrated Security=True";
         private void btnlogin_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection(connectstring);

@@ -57,6 +57,7 @@
     <Compile Include="DanhSachLop.Designer.cs">
       <DependentUpon>DanhSachLop.cs</DependentUpon>
     </Compile>
+    <Compile Include="EncryptorRSA.cs" />
     <Compile Include="MD5Hash.cs" />
     <Compile Include="NhapDiem.cs">
       <SubType>Form</SubType>

@@ -47,7 +47,7 @@ namespace Lab03Nhom
             sv.ShowDialog();
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        string connectstring = "Data Source=DESKTOP-BD4IRUN\\SQLSERVER2017;Initial Catalog=QLSVNhom;Integrated Security=True";
 
         private void DanhSachLop_Load(object sender, EventArgs e)
         {

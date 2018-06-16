@@ -26,7 +26,7 @@ namespace Lab03Nhom
             this.manv = _manv;
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        string connectstring = "Data Source=DESKTOP-BD4IRUN\\SQLSERVER2017;Initial Catalog=QLSVNhom;Integrated Security=True";
         private void ThemLop_Load(object sender, EventArgs e)
         {
             //string manv = DangNhap.name;
