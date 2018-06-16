@@ -58,13 +58,13 @@
     <Compile Include="DanhSachLop.Designer.cs">
       <DependentUpon>DanhSachLop.cs</DependentUpon>
     </Compile>
-    <Compile Include="DanhSachNhanVien.cs">
+    <Compile Include="MD5Hash.cs" />
+    <Compile Include="NhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DanhSachNhanVien.Designer.cs">
-      <DependentUpon>DanhSachNhanVien.cs</DependentUpon>
+    <Compile Include="NhanVien.Designer.cs">
+      <DependentUpon>NhanVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="MD5Hash.cs" />
     <Compile Include="NhapDiem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,8 +99,8 @@
     <EmbeddedResource Include="DanhSachLop.resx">
       <DependentUpon>DanhSachLop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DanhSachNhanVien.resx">
-      <DependentUpon>DanhSachNhanVien.cs</DependentUpon>
+    <EmbeddedResource Include="NhanVien.resx">
+      <DependentUpon>NhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhapDiem.resx">
       <DependentUpon>NhapDiem.cs</DependentUpon>

@@ -40,12 +40,18 @@ namespace Lab03Nhom
             dsl.ShowDialog();
         }
 
+        private void ShowNhanVien()
+        {
+            NhanVien nv = new NhanVien(name);
+            nv.ShowDialog();
+        }
+
         private void btnlogin_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection(connectstring);
             name = txtname.Text;
             string password = SHA1Hash.Hash(txtpass.Text);
-            string query = "select * from NHANVIEN where MANV = '"+name+"' and convert(varbinary,'"+password+"') = MATKHAU";
+            string query = "select * from NHANVIEN where MANV = '"+name+"' and convert(varbinary(2048),'"+password+"') = MATKHAU";
             SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
             SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -59,14 +65,14 @@ namespace Lab03Nhom
                 
                 if(DialogResult.OK == MessageBox.Show("Đăng nhập thành công!!!"))
                 {
-                    Thread thread = new Thread(new ThreadStart(ShowDanhSachLop));
+                    Thread thread = new Thread(new ThreadStart(ShowNhanVien));
                     thread.Start();
                     this.Close();
 
 
-                    DanhSachLop dslop = new DanhSachLop();
-                    this.Hide();
-                    dslop.ShowDialog();
+                    //DanhSachLop dslop = new DanhSachLop();
+                    //this.Hide();
+                    //dslop.ShowDialog();
                     //this.Close();
                 }
                 
