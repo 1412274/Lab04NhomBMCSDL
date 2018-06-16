@@ -13,7 +13,7 @@ namespace Lab03Nhom
 {
     public partial class NhapDiem : Form
     {
-        String connectionString = @"Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        String connectionString = ConnectString.GetConnection();
         String MaSV = null;
         String HoTen = null;
         String MaLop = null;
@@ -43,8 +43,7 @@ namespace Lab03Nhom
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SP_SEL_HOCPHAN ", connection);
-                command.CommandType = CommandType.StoredProcedure;
+                SqlCommand command = new SqlCommand("select * from hocphan ", connection);
 
                 SqlDataReader reader;
                 DataTable table = new DataTable();
@@ -59,7 +58,7 @@ namespace Lab03Nhom
 
                 connection.Close();
             }
-            
+
         }
 
         private void buttonXemDiem_Click(object sender, EventArgs e)
@@ -68,29 +67,24 @@ namespace Lab03Nhom
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SP_SEL_BANGDIEM ", connection);
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.Clear();
-                command.Parameters.Add("@MASV", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@MK", SqlDbType.NVarChar, 100);
-                command.Parameters.Add("@PUBKEY", SqlDbType.VarChar, 20);
-
-                command.Parameters["@MASV"].Value = this.textBoxMaSinhVien.Text;
-                command.Parameters["@MK"].Value = this.textBoxMatKhau.Text;
-                command.Parameters["@PUBKEY"].Value = MaNVDN;
+                SqlCommand command = new SqlCommand("select masv, mahp, diemthi from bangdiem where masv = '" + this.textBoxMaSinhVien.Text + "'", connection);
 
                 SqlDataReader reader;
-                DataTable table = new DataTable();
 
                 reader = command.ExecuteReader();
-                table.Load(reader);
+
+                DataTable table = new DataTable();
+                table.Columns.Add(new DataColumn("masv"));
+                table.Columns.Add(new DataColumn("mahp"));
+                table.Columns.Add(new DataColumn("diemthi"));
+
+                while (reader.Read())
+                {
+                    byte[] byteDiemThi = (Byte[])reader.GetValue(2);
+                    table.Rows.Add(reader.GetValue(0), reader.GetValue(1), RSACryptography.RSAdecrypt(byteDiemThi, this.textBoxMatKhau.Text));
+                }
 
                 this.dataGridViewDiemThi.DataSource = table;
-
-                command.CommandText = "SP_SEL_HOCPHAN";
-                command.Parameters.Clear();
-
 
                 connection.Close();
             }
@@ -102,28 +96,24 @@ namespace Lab03Nhom
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SP_INS_BANGDIEM  ", connection);
-                command.CommandType = CommandType.StoredProcedure;
+                String pubKey = RSACryptography.createKeyPair(this.textBoxMatKhau.Text);
+                byte[] encryptedDiem = RSACryptography.RSAencrypt(this.textBoxDiem.Text, pubKey);
 
-                command.Parameters.Clear();
-                command.Parameters.Add("@MASV", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@MAHP", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@PUBKEY", SqlDbType.VarChar, 20);
-                command.Parameters.Add("@DIEMTHI", SqlDbType.Float);
-                command.Parameters.Add("@KQ", SqlDbType.Int).Direction = ParameterDirection.Output;
+                String commandText = "insert into bangdiem values('"
+                    + this.textBoxMaSinhVien.Text + "', '"
+                    + this.comboBoxDSHocPhan.SelectedValue + "', @encryptedDiem)";
 
-                command.Parameters["@MASV"].Value = this.textBoxMaSinhVien.Text;
-                command.Parameters["@MAHP"].Value = this.comboBoxDSHocPhan.SelectedValue;
-                command.Parameters["@PUBKEY"].Value = MaNVDN;
-                command.Parameters["@DIEMTHI"].Value = this.textBoxDiem.Text;
-                command.Parameters["@KQ"].Value = 0;
+                SqlCommand command = new SqlCommand(commandText, connection);
+                command.Parameters.Add("@encryptedDiem", SqlDbType.VarBinary);
+                command.Parameters["@encryptedDiem"].Value = encryptedDiem;
 
-                command.ExecuteNonQuery();
-                
-                if (command.Parameters["@KQ"].Value.ToString() == "1")
+                int result = command.ExecuteNonQuery();
+
+                if (result != 1)
                 {
                     MessageBox.Show("Có lỗi xảy ra");
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Thêm điểm thành công");
                 }
@@ -144,7 +134,7 @@ namespace Lab03Nhom
                     connection.Open();
 
                     String query = "delete from bangdiem where masv = '" + maSV + "' and mahp = '" + maHP + "'";
-                  
+
                     SqlCommand command = new SqlCommand(query, connection);
                     command.CommandType = CommandType.Text;
 
@@ -153,7 +143,8 @@ namespace Lab03Nhom
                     if (kq != 1)
                     {
                         MessageBox.Show("Xóa thất bại");
-                    } else
+                    }
+                    else
                     {
                         this.dataGridViewDiemThi.Rows.RemoveAt(item.Index);
                         MessageBox.Show("Xóa thành công");

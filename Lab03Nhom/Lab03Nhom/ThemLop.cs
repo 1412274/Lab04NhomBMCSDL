@@ -26,7 +26,7 @@ namespace Lab03Nhom
             this.manv = _manv;
         }
 
-        string connectstring = "Data Source=KIM;Initial Catalog=QLSVNhom;Integrated Security=True";
+        string connectstring = ConnectString.GetConnection();
         private void ThemLop_Load(object sender, EventArgs e)
         {
             //string manv = DangNhap.name;
@@ -50,7 +50,7 @@ namespace Lab03Nhom
             //ComboBox cb = sender as cbmanv;
             SqlConnection conn = new SqlConnection(connectstring);
             conn.Open();
-            string query = "select *from LOP where MALOP = '" + txtmalop.Text + "'";
+            string query = "select * from LOP where MALOP = '" + txtmalop.Text + "'";
             SqlCommand command = new SqlCommand(query, conn);
             SqlDataAdapter adapter = new SqlDataAdapter(command);
 
@@ -91,7 +91,7 @@ namespace Lab03Nhom
             DataSet GetLopHoc()
             {
                 conn.Open();
-                string getlop = "select *from LOP";
+                string getlop = "select * from LOP";
                 command = new SqlCommand(getlop, conn);
                 adapter = new SqlDataAdapter(command);
                 DataSet data = new DataSet();
