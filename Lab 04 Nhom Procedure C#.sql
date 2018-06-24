@@ -1,6 +1,16 @@
-﻿USE QLSVNhom
+﻿/*----------------------------------------------------------
+MASV: 1412274, 1412282, 1412414
+HO TEN CAC THANH VIEN NHOM: 
+	1412274 - Nguyen Hoang Kim 
+	1412282 - Nguyen Hoang Lan 
+	1412414 - Vuong Thien Phu
+LAB: 04 - NHOM
+NGAY: 13/6/2018
+----------------------------------------------------------*/
+USE QLSVNhom
 GO
 
+---------------------------------Bảng SINHVIEN---------------------------------
 --Thêm sinh viên
 CREATE PROCEDURE SP_INS_SINHVIEN @MASV VARCHAR(20), 
 								 @HOTEN NVARCHAR(100), 
@@ -111,3 +121,4 @@ GO
 
 DROP PROCEDURE SP_MAX_MASV
 GO
+-------------------------------------------------------------------------------

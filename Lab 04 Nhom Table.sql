@@ -1,21 +1,14 @@
 ﻿/*----------------------------------------------------------
 MASV: 1412274, 1412282, 1412414
 HO TEN CAC THANH VIEN NHOM: 
-	1412274 - Nguyen Hoang Kim
+	1412274 - Nguyen Hoang Kim 
 	1412282 - Nguyen Hoang Lan
 	1412414 - Vuong Thien Phu
 LAB: 04 - NHOM
 NGAY: 13/6/2018
 ----------------------------------------------------------*/
---CAU LENH TAO DB
-CREATE DATABASE QLSVNhom
-GO
-
 USE QLSVNhom
 GO
-
-alter database QLSVN
-set compatibility_level = 120
 
 --CAC CAU LENH TAO TABLE
 CREATE TABLE SINHVIEN

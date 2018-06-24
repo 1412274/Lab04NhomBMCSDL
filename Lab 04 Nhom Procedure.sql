@@ -1,5 +1,14 @@
-﻿use QLSVNhom
-go
+﻿/*----------------------------------------------------------
+MASV: 1412274, 1412282, 1412414
+HO TEN CAC THANH VIEN NHOM: 
+	1412274 - Nguyen Hoang Kim 
+	1412282 - Nguyen Hoang Lan
+	1412414 - Vuong Thien Phu
+LAB: 04 - NHOM
+NGAY: 13/6/2018
+----------------------------------------------------------*/
+USE QLSVNhom
+GO
 
 --i) Stored dùng để thêm mới dữ liệu (Insert) vào table SINHVIEN, trong đó
 --• Thuộc tính MATKHAU được mã hóa (HASH) sử dụng SHA1
